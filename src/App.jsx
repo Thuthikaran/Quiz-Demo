@@ -1,6 +1,6 @@
 const App = () => {
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center py-10">
       <div className="py-3">
         <h1 className="text-sm italic ">
           Ce quiz est conçu pour fournir des recommandations de bijoux

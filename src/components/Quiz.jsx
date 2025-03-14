@@ -11,12 +11,7 @@ const quizData = [
   },
   {
     question: '03. Quel type de bijou préférez-vous ?',
-    choices: [
-      'Fin et délicat',
-      'Gros et imposant',
-      'Un mélange des deux',
-      'Ça dépend de mon humeur',
-    ],
+    choices: ['Fin et délicat', 'Gros et imposant', 'Un mélange des deux', 'Ça dépend de mon humeur'],
   },
   {
     question: '04. Quel type de bijou portez-vous le plus souvent ?',
@@ -24,12 +19,7 @@ const quizData = [
   },
   {
     question: '05. Préférez-vous les bijoux avec ou sans pierres précieuses ?',
-    choices: [
-      'Avec des pierres précieuses',
-      'Sans pierre, designs épurés',
-      'Un mélange des deux',
-      'Peu importe',
-    ],
+    choices: ['Avec des pierres précieuses', 'Sans pierres, designs épurés', 'Un mélange des deux', 'Peu importe'],
   },
   {
     question: '06. Quel type de bijoux recherchez-vous ?',
@@ -50,8 +40,7 @@ const quizData = [
     ],
   },
   {
-    question:
-      '08. Aimez-vous les bijoux personnalisés avec des initiales ou des symboles significatifs ?',
+    question: '08. Aimez-vous les bijoux personnalisés avec des initiales ou des symboles significatifs ?',
     choices: [
       'Oui, j’adore la personnalisation',
       'Pas forcément, je préfère des designs classiques',
@@ -63,46 +52,103 @@ const quizData = [
 
 const Quiz = () => {
   const [quiz, setQuiz] = useState(0);
+  const [userAnswers, setUserAnswers] = useState(Array(quizData.length).fill(null));
+  const [email, setEmail] = useState("");
 
-  function handleClick() {
-      if (quiz < quizData.length - 1) {
-        setQuiz(quiz + 1)
+  const handleClick = () => {
+    if (quiz === quizData.length) {
+      // Validate email
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        alert('Veuillez entrer une adresse e-mail valide.');
+        return;
+      }
+      // Handle email submission (e.g., send to server or display recommendations)
+      alert(`Merci! Vos recommandations seront envoyées à ${email}.`);
+      return;
     }
-    console.log(quiz);
-  }
 
-  function handleBack() {
+    if (userAnswers[quiz] === null) {
+      alert('Veuillez sélectionner une réponse avant de continuer.');
+      return;
+    }
+    if (quiz < quizData.length - 1) {
+      setQuiz(quiz + 1);
+    } else {
+      setQuiz(quiz + 1); // Mark quiz as completed
+    }
+  };
+
+  const handleBack = () => {
     if (quiz > 0) {
       setQuiz(quiz - 1);
-      console.log(quiz);
     }
-  }
+  };
+
+  const handleAnswer = (choice) => {
+    const newAnswers = [...userAnswers];
+    newAnswers[quiz] = choice;
+    setUserAnswers(newAnswers);
+    console.log(userAnswers);
+  };
 
   return (
     <div>
-      <div className="flex flex-col items-center justify-center">
-        <h1>{quizData[quiz].question}</h1>
-        {quizData[quiz].choices.map((choice, index) => (
-          <div key={index}>
-            <input type="radio" name="myQuiz" value={choice} /> {choice}
+      <div className="flex flex-col items-center justify-center py-20">
+        {quiz === quizData.length ? (
+          <div className='flex flex-col'>
+            <label htmlFor="email-input">
+              Veuillez entrer votre adresse e-mail pour recevoir vos recommandations personnalisées.
+            </label>
+            <input
+              id="email-input"
+              type="email"
+              placeholder="Entrez votre email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="mt-2 p-2 border rounded"
+            />
           </div>
-        ))}
-        <div>
+        ) : (
+          <div>
+            <h1 className="py-5 text-xl font-bold">{quizData[quiz].question}</h1>
+            {quizData[quiz].choices.map((choice, index) => (
+              <div key={index} className="py-2">
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="radio"
+                    name="myQuiz"
+                    value={choice}
+                    checked={userAnswers[quiz] === choice}
+                    onChange={() => handleAnswer(choice)}
+                    className="form-radio text-[#FDC7E8]"
+                  />
+                  <span>{choice}</span>
+                </label>
+              </div>
+            ))}
+          </div>
+        )}
+        <div className="flex space-x-4">
+          {quiz < quizData.length && (
+            <button
+              className="btn bg-[#FDC7E8] text-white font-bold p-2 cursor-pointer m-3 rounded-md hover:bg-[#FFA7D1] transition-colors"
+              onClick={handleBack}
+              disabled={quiz === 0}
+            >
+              Précédent
+            </button>
+          )}
           <button
-            className="btn bg-[#FDC7E8] text-white p-1 cursor-pointer m-3 rounded-md"
-            onClick={handleBack}
-          >
-            Back
-          </button>
-          <button
-            className="next-btn bg-[#FDC7E8] text-white p-1 cursor-pointer m-3 rounded-md"
+            className="next-btn bg-[#FDC7E8] text-white font-bold p-2 cursor-pointer m-3 rounded-md hover:bg-[#FFA7D1] transition-colors"
             onClick={handleClick}
           >
-            Next
+            {quiz === quizData.length - 1 ? 'Terminer' : 'Suivant'}
           </button>
         </div>
       </div>
     </div>
   );
 };
+
 export default Quiz;

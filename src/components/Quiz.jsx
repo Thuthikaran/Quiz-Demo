@@ -96,8 +96,8 @@ const Quiz = () => {
     <div>
       <div className="flex flex-col items-center justify-center py-20">
         {quiz === quizData.length ? (
-          <div className='flex flex-col'>
-            <label htmlFor="email-input">
+          <div className="flex flex-col">
+            <label htmlFor="email-input" className="text-center">
               Veuillez entrer votre adresse e-mail pour recevoir vos recommandations personnalisées.
             </label>
             <input
@@ -106,23 +106,25 @@ const Quiz = () => {
               placeholder="Entrez votre email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="mt-2 p-2 border rounded"
+              className="mt-5 mx-3 p-2 border rounded  text-center"
             />
           </div>
         ) : (
           <div>
-            <h1 className="py-5 text-xl font-bold">{quizData[quiz].question}</h1>
+            <h1 className="py-5 text-xl font-bold text-center">{quizData[quiz].question}</h1>
             {quizData[quiz].choices.map((choice, index) => (
-              <div key={index} className="py-2">
+              <div key={index} className="flex flex-col items-center">
                 <label className="flex items-center space-x-2">
-                  <input
-                    type="radio"
-                    name="myQuiz"
-                    value={choice}
-                    checked={userAnswers[quiz] === choice}
-                    onChange={() => handleAnswer(choice)}
-                    className="form-radio text-[#FDC7E8]"
-                  />
+                  <div key={index} className="py-2 flex items-center">
+                    <input
+                      type="radio"
+                      name="myQuiz"
+                      value={choice}
+                      checked={userAnswers[quiz] === choice}
+                      onChange={() => handleAnswer(choice)}
+                      className="form-radio text-[#FDC7E8]"
+                    />
+                  </div>
                   <span>{choice}</span>
                 </label>
               </div>

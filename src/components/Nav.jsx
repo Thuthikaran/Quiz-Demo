@@ -5,13 +5,15 @@ import { faShopify } from '@fortawesome/free-brands-svg-icons';
 const Nav = () => {
   return (
     <div>
-      <div className="flex items-center justify-between py-1">
+      <div className="flex items-center justify-between py-1 mt-2">
         <div className="flex items-center pl-5">
-          <img
-            src="https://res.cloudinary.com/drxas1wpe/image/upload/v1744380015/pqzyrehxyh2pfkx15iyc.png"
-            alt="icon"
-            className="rounded-full w-12 h-auto"
-          />
+          <a href="https://lolineaccessories.fr/" target='_blank' title="Lolineaccessories.fr">
+            <img
+              src="https://res.cloudinary.com/drxas1wpe/image/upload/v1744380015/pqzyrehxyh2pfkx15iyc.png"
+              alt="icon"
+              className="rounded-full w-12 h-auto"
+            />
+          </a>
         </div>
 
         <div className="px-3">

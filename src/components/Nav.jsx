@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser } from '@fortawesome/free-regular-svg-icons';
-import { faShopify } from '@fortawesome/free-brands-svg-icons';
+// import { faShopify } from '@fortawesome/free-brands-svg-icons';
 
 const Nav = () => {
   return (
@@ -17,12 +17,12 @@ const Nav = () => {
         </div>
 
         <div className="px-3">
-          <a href="https://www.shopify.com/fr" target="_blank" title="Shopify.com">
+          {/* <a href="https://www.shopify.com/fr" target="_blank" title="Shopify.com">
             <FontAwesomeIcon icon={faShopify} className="text-[green] text-3xl px-2" />
-          </a>
+          </a> */}
 
           <a href="#" title="Eloïne DA SILVA">
-            <FontAwesomeIcon icon={faCircleUser} className="text-pink-500 text-3xl px-2" />
+            <FontAwesomeIcon icon={faCircleUser} className="text-black text-3xl px-2" />
           </a>
         </div>
       </div>

@@ -134,7 +134,7 @@ const Quiz = () => {
         <div className="flex space-x-4">
           {quiz < quizData.length && (
             <button
-              className="btn bg-[#FDC7E8] text-white font-bold p-2 cursor-pointer m-3 rounded-md hover:bg-[#FFA7D1] transition-colors"
+              className="btn bg-[#BE8577] text-white font-bold p-2 cursor-pointer m-3 rounded-md transition-colors"
               onClick={handleBack}
               disabled={quiz === 0}
             >
@@ -142,7 +142,7 @@ const Quiz = () => {
             </button>
           )}
           <button
-            className="next-btn bg-[#FDC7E8] text-white font-bold p-2 cursor-pointer m-3 rounded-md hover:bg-[#FFA7D1] transition-colors"
+            className="next-btn bg-[#BE8577] text-white font-bold p-2 cursor-pointer m-3 rounded-md transition-colors"
             onClick={handleClick}
           >
             {quiz === quizData.length - 1 ? 'Terminer' : 'Suivant'}
